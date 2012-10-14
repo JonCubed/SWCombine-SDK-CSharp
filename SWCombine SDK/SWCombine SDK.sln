@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWCombine SDK", "SWCombine SDK.csproj", "{EC9D4648-1C9B-432B-83DC-C971BAA30C08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test Console App", "..\ConsoleApplication1\Test Console App.csproj", "{A33CBE07-FF12-40F4-BCFA-92B836F9562A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test Console App", "..\Test Console App\Test Console App.csproj", "{A33CBE07-FF12-40F4-BCFA-92B836F9562A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
