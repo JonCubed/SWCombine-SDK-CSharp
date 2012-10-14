@@ -19,7 +19,7 @@ namespace ConsoleApplication1
 	 	
                 var scopes = new List<string>() { "character_read" };                               
 
-                var swc = SWCombine.SDK.SWC.Initialise(client_id, client_secret);
+                var swc = SWCombine.SDK.SWC.Initialise(client_id, client_secret, 1111);
                 swc.AuthoriseComplete += new SWCombine.SDK.AuthoriseCompleteHandler(OnAuthoriseComplete);
                 swc.AttemptAuthorise(scopes, "test key;value");
 
@@ -33,7 +33,7 @@ namespace ConsoleApplication1
             Console.ReadKey();
         }
         
-        private static void OnAuthoriseComplete(object sender, AuthoriseCompleteArgs e)
+        private static void OnAuthoriseComplete(object sender, AuthoriseCompleteEventArgs e)
         {
             Console.WriteLine("Authorise Result: " + e.DeniedReason);
         }

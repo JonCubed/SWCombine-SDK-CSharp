@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthListener.cs" />
+    <Compile Include="Event Args\RequestCompleteEventArgs.cs" />
     <Compile Include="PersistentData.cs" />
     <Compile Include="Enumerations\OAuth\AccessTypes.cs" />
     <Compile Include="Enumerations\OAuth\GrantTypes.cs" />
@@ -54,7 +56,7 @@
     <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Data Contracts\OAuthToken.cs" />
     <Compile Include="Enumerations\OAuth\AuthorisationResult.cs" />
-    <Compile Include="Event Args\AuthoriseCompleteArgs.cs" />
+    <Compile Include="Event Args\AuthoriseCompleteEventArgs.cs" />
     <Compile Include="SWC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

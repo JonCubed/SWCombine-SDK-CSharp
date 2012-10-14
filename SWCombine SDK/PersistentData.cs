@@ -9,15 +9,42 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SWCombine.SDK
 {
+    /// <summary>
+    /// Represents data that needs to persist after app is closed.
+    /// </summary>
     [Serializable]
     class PersistentData
     {
-        private const string Filename = ".config";
+        #region Members 
 
+        private const string Filename = ".data";
+
+        #endregion
+
+        #region Properties 
+
+        /// <summary>
+        /// Name of character that app acts on behalf of.
+        /// </summary>
         public string Character { get; set; }
+
+        /// <summary>
+        /// Refresh token that can be used to obtain a new one
+        /// </summary>
         public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// Cookies to save user from logging in again
+        /// </summary>
         public string Cookie { get; set; }
 
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// Saves persistent data to storage.
+        /// </summary>
         public void Save()
         {
             using (var stream = new MemoryStream())
@@ -44,6 +71,10 @@ namespace SWCombine.SDK
             }
         }
 
+        /// <summary>
+        /// Loads persistent data from storage.
+        /// </summary>
+        /// <returns></returns>
         public static PersistentData Load()
         {
             try
@@ -81,5 +112,7 @@ namespace SWCombine.SDK
                 throw;
             }
         }
+
+        #endregion
     }
 }

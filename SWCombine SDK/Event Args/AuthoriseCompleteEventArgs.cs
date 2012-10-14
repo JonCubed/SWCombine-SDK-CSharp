@@ -7,7 +7,7 @@ using SWCombine.SDK.Extensions;
 
 namespace SWCombine.SDK.OAuth
 {
-    public class AuthoriseCompleteArgs: System.EventArgs
+    public class AuthoriseCompleteEventArgs: System.EventArgs
     {
 
         #region Members
@@ -19,9 +19,9 @@ namespace SWCombine.SDK.OAuth
 
         #region Constructors
 
-        public AuthoriseCompleteArgs(AuthorisationResult result, string state) : this(result, result.GetDescription(), state) { }
+        public AuthoriseCompleteEventArgs(AuthorisationResult result, string state) : this(result, result.GetDescription(), state) { }
 
-        public AuthoriseCompleteArgs(AuthorisationResult result, string deniedReason, string state)
+        public AuthoriseCompleteEventArgs(AuthorisationResult result, string deniedReason, string state)
         {
             _result = result;
             _reason = String.IsNullOrWhiteSpace(deniedReason) ? result.GetDescription() : deniedReason;
