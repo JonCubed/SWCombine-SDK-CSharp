@@ -93,12 +93,12 @@ namespace SWCombine.SDK
                 // load persistent data
                 var data = PersistentData.Load();
 
-                if (!string.IsNullOrEmpty(data.RefreshToken))
+                if (data != null && !string.IsNullOrEmpty(data.Cookie))
                 {
                     swc.Cookie = data.Cookie;
                 }
 
-                if (!string.IsNullOrEmpty(data.RefreshToken))
+                if (data != null && !string.IsNullOrEmpty(data.RefreshToken))
                 {
                     swc.Token = new OAuthToken() { RefreshToken = data.RefreshToken };
                 }
@@ -364,13 +364,20 @@ namespace SWCombine.SDK
                 {
                     if (response.StatusCode != HttpStatusCode.OK)
                     {
-                        throw new Exception(String.Format("Server error (HTTP {0}: {1}).", response.StatusCode, response.StatusDescription));
+                        var error = SWCHelper.JsonTo<RequestError>(response.GetResponseStream());
+
+                        throw new RequestException(error, response.StatusCode, response.StatusDescription);
                     }
 
-                    var jsonSerializer = new DataContractJsonSerializer(typeof(TValue));
-                    object objResponse = jsonSerializer.ReadObject(response.GetResponseStream());
-                    return objResponse as TValue;
+                    var content = SWCHelper.JsonTo<TValue>(response.GetResponseStream());
+                    return content;
                 }
+            }
+            catch (WebException ex)
+            {
+                var error = SWCHelper.JsonTo<RequestError>(ex.Response.GetResponseStream());
+
+                throw new RequestException(error, ex);
             }
             catch (Exception)
             {
@@ -387,7 +394,7 @@ namespace SWCombine.SDK
         /// <summary>
         /// Process Authorisation result when using localhost method.
         /// </summary>
-        void Server_RequestComplete(object sender, RequestCompleteEventArgs e)
+        private void Server_RequestComplete(object sender, RequestCompleteEventArgs e)
         {
             var server = sender as AuthListener;
             server.Stop();
